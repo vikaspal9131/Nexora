@@ -13,31 +13,42 @@
 </head>
 <body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
     <!-- Header -->
-    <header class=" p-4 text-right text-xl font-semibold shadow-md">PDF Upload Dashboard</header>
+    <header class=" flex justify-between  p-4 text-left text-xl  shadow-md">
+        <div>Enthos</div>
+    
+    </header>
     
     <div class="flex flex-col md:flex-row flex-1 p-4 gap-4">
         <!-- Sidebar / Left Panel -->
-        <div class="w-full md:w-1/3 bg-gray-800 shadow-md p-6 rounded-lg">
+        <div id="left-sidebar" class="w-full md:w-1/2 shadow-md p-6 rounded-lg">
             <h2 class="text-xl font-semibold mb-4">Upload PDF & Description</h2>
             
             <!-- Drag and Drop PDF Upload -->
-            <label class="block mb-2 text-sm font-medium text-gray-300">Upload PDF</label>
-            <div id="drop-area" class="w-full h-64 p-6 border-2 border-gray-500 rounded-md mb-2 flex items-center justify-center cursor-pointer">
+            <label class="block mb-2 text-sm font-medium text-gray-300 ">Upload PDF</label>
+            <div id="drop-area" class="w-full bg-black h-32 p-6 border-2 border-gray-500 rounded-md mb-2 flex items-center justify-center cursor-pointer">
                 <span class="text-gray-400">Drag & Drop PDF here or Click to Upload</span>
                 <input id="file-input" type="file" accept="application/pdf" class="hidden">
             </div>
             <p id="file-name" class="text-sm text-gray-400"></p>
             
             <!-- Description Box -->
-            <label class="block mb-2 text-sm font-medium text-gray-300">Description</label>
-            <textarea class="w-full p-2 border rounded-md h-32 bg-gray-700 text-gray-200" placeholder="Write a short description..."></textarea>
+            <label class="block mb-2 text-sm font-medium bg-transparent">Description</label>
+            <textarea class="w-full p-2 border rounded-md h-32 bg-transparent  text-gray-200" placeholder="Write a short description..."></textarea>
             
             <!-- Upload Button -->
-            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Upload</button>
+            <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Detailed Resume Review</button>
+            <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Match Percentage Analysis</button>
         </div>
         
         <!-- Right Panel (PDF Preview) -->
-        <div class="w-full md:w-full  p-6 flex items-center justify-center rounded-lg mt-4 md:mt-0">
+        <div class="w-full md:w-full  p-6  rounded-lg mt-4 md:mt-0">
+            <header class="flex gap-4">
+                <h1> Overall</h1>
+                <h1>Notable Gaps</h1>
+                <h1>Recommendations</h1>
+                <h1>Final Verdict </h1>
+                <h1>Areas for Improvement</h1>
+            </header>
             <p class="text-gray-400">Your uploaded PDF preview will appear here...</p>
         </div>
     </div>

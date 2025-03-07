@@ -33,3 +33,11 @@ header{
 #middle{
   width: 90%;
 }
+
+#left-sidebar{
+  background: #212121;
+}
+
+body{
+  font-weight: 300;
+}
