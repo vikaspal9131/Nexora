@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/cdn.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-white text-black">
-
+<div id="main">
     <header class="flex justify-between items-center p-6">
-        <h1 class="text-2xl"> <i class="ri-arrow-up-down-fill"></i>Nexora</h1>
+        <h1 class="text-2xl"><i class="ri-artboard-2-line"></i> Nexora</h1>
         <nav class="hidden md:flex space-x-6 font-semibold ">
             <a href="#" class="hover:underline">PRODUCT</a>
             <a href="#" class="hover:underline">TOOL</a>
@@ -39,7 +39,7 @@
         <!-- <img src="./tesdd.jpg" alt="Team Work" class="w-full h-auto rounded-lg "> -->
         <video class="w-full  mx-auto rounded-lg shadow-lg" autoplay muted loop playsinline preload="metadata">
             <source src="assets/video/test.webm" type="video/webm">
-            <!-- <source src="assets/video/test.mp4" type="video/mp4"> -->
+            <source src="assets/video/test.mp4" type="video/mp4">
         </video>
         
  
@@ -47,7 +47,7 @@
     </div>
 
     <section id="del" class="text-left mt-16 px-6 mb-[90px]">
-        <h2 id="side" class="text-5xl md:text-6xl font-serif font-bold leading-tight ">Nexora: AI-powered tool <br> for enhancing your resume. </h2>
+        <h2 id="side" class="text-5xl md:text-6xl font-serif font-bold leading-tight ">Nexora AI-powered tool <br> for enhancing your resume. </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
             <div>
                 <h3 class="text-xl font-semibold">Unlimited paid time off</h3>
@@ -64,12 +64,7 @@
                 <p class="text-gray-600">We cover 100% of medical, dental and vision for our US-based employees and
                     their dependents.</p>
             </div>
-
-
-
         </div>
-
-     
     </section>
     <section class="bg-black text-white  py-16  md:px-12 font-[Lexend]">
         <div class="max-w-6xl mx-auto text-center">
@@ -117,7 +112,7 @@
     </section>
 
     <section class="h-screen w-full flex justify-center items-center">
-        <div class="w-2/5 h-3/4 bg-black overflow-hidden">
+        <div class="w-2/5 h-[500px] bg-black overflow-hidden">
             <img class="w-full h-full object-cover" src="./assets/images/about.webp" alt="Image">
         </div>
         <div class="flex flex-col items-start w-2/4 h-3/4 px-16 font-[Lexend]">
@@ -191,6 +186,10 @@
             <p>All rights reserved.</p>
         </div>
     </footer>
+</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+<script src="./script/smooth.js"></script>
+
 
 </html>
