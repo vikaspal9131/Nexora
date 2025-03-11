@@ -3,54 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumez-Dashboard</title>
+    <title>Nexora-dashboard</title>
+    <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
-
+    rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
-    <!-- Header -->
     <header class=" flex justify-between  p-4 text-left text-xl  shadow-md">
         <div class="px-6"> <i class="ri-artboard-2-line"></i> Nexora</div>
-        <div class="w-[20px] rounded-full">
-            <!-- <img src="" alt="" class="rounded-full" > -->
-            <i class="ri-user-line"></i>
+        <div class="w-[30px] mr-[40px]">
+            <img  class="rounded-full" src="https://avatars.githubusercontent.com/u/113900393?v=4 " alt="">
         </div>
     </header>
-    
     <div class="flex flex-col md:flex-row flex-1 p-4 gap-4">
-        <!-- Sidebar / Left Panel -->
-        <div id="left-sidebar" class="w-full md:w-1/2 shadow-md p-6">
-            <h2 class="text-xl mb-4">Upload Resume & Job Description</h2>
-            
-            <!-- Drag and Drop PDF Upload -->
+        <div id="left-sidebar" class="w-full md:w-1/2 shadow-md px-6 ">
+            <h2 class="text-xl mb-8 font-[300]">Upload Resume & Job Description</h2>
             <label class="block mb-2 text-sm text-gray-300 font-[200]">Upload PDF</label>
             <div id="drop-area" class="w-full bg-black h-32 p-6 border-[1px] border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
                 <i class="ri-folder-upload-fill"></i>
                 <span class="text-gray-400 font-[300]">Drag & Drop PDF here or Click to Upload</span>
                 <input id="file-input" type="file" accept="application/pdf" class="hidden">
             </div>
-            <p id="file-name" class="text-sm text-gray-400"></p>
-            
-            <!-- Description Box -->
+            <p id="file-name" class="text-sm text-gray-400 mt-8"></p>
             <label class="block mb-2 text-sm font-[200] bg-transparent">Description</label>
             <textarea class="w-[500px] h-[248px] p-2 border-[1px] rounded-md h-32 bg-transparent  text-gray-200" placeholder="Past the job description..."></textarea>
-            
-            <!-- Upload Button -->
             <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Detailed Resume Review</button>
             <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Match Percentage Analysis</button>
         </div>
-        
-        <!-- Right Panel (PDF Preview) -->
-        <div class="w-full md:w-full rounded-lg mt-4 md:mt-0">
-            <header class="flex gap-8 text-[15px] cursor-pointer ">
+        <div class="w-full md:w-full rounded-lg mt-4 md:mt-0 px-12">
+            <header class="flex gap-8 text-[13px] font-[300] cursor-pointer ">
                 <p> Overall</p>
                 <h1>Notable Gaps</h1>
                 <h1>Recommendations</h1>
