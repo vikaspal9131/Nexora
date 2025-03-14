@@ -1,9 +1,0 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyBnrOLlosTDGHCxXKZdFrO_ev-Oy2Ruv3U",
-    authDomain: "nexora-213e2.firebaseapp.com",
-    projectId: "nexora-213e2",
-    storageBucket: "nexora-213e2.appspot.com", 
-    messagingSenderId: "998457123271",
-    appId: "1:998457123271:web:a26d2806f52c35479b39e2",
-    measurementId: "G-8YMEDHQCEL"
-};
