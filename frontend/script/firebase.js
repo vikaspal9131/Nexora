@@ -26,7 +26,7 @@ googleBtn.addEventListener("click", async () => {
     try {
         const result = await signInWithPopup(auth, provider);
         console.log("User signed in:", result.user);
-        window.location.href = "/";
+        window.location.href = "../dashboard.html";
     } catch (error) {
         console.error("Login Error:", error.message);
     }
