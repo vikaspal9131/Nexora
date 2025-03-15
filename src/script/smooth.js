@@ -1,5 +1,5 @@
 const locoScroll = new LocomotiveScroll({
   el: document.querySelector("#main"),
   smooth: true ,
-  lerp:0.07
+  lerp:0.06
 });

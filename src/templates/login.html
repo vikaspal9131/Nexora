@@ -3,17 +3,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora-Log in</title>
-    <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/cdn.css">
+    <link rel="shortcut icon" href="/src/assets/images/fevicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/src/assets/css/cdn.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body  class="h-full flex items-center justify-center font-[lexend]">
+    <div id="loader" style="display: none; text-align: center;">
+        <p>Loading...</p>
+    </div>
     <h1 class="absolute top-5 left-5 text-[30px] text-black bg-transparent z-10">
         <i class="ri-artboard-2-line"></i> Nexora
     </h1>
   
-    
+   
+
     <div class="w-full  flex items-center justify-center ">
         <div class="max-w-md w-full px-[10px]">
             <h1 class="text-center text-[50px]"><i class="ri-artboard-2-line"></i></h1>
@@ -34,6 +38,6 @@
         </div>
     </div>    
 </body>
-<script src="./script/firebase.js" type="module"></script>
-<script src="./script/github_login.js" type="module"></script>
+<script src="/src/script/firebase.js" type="module"></script>
+<script src="/src/script/github_login.js" type="module"></script>
 </html>
