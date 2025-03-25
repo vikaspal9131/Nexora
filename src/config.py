@@ -1,15 +1,6 @@
-from dotenv import load_dotenv
 import os
-import google.generativeai as genai
 
-
-load_dotenv()
-
-
-API_KEY = os.getenv("GOOGLE_API_KEY")
-
-if not API_KEY:
-    raise ValueError("GOOGLE_API_KEY is missing! Please set it in the .env file.")
-
-
-genai.configure(api_key=API_KEY)
+class Config:
+    SECRET_KEY = os.urandom(24).hex()
+    SESSION_TYPE = 'filesystem'
+    GENAI_API_KEY = "AIzaSyAH7POcFUh2rVr8oqy5PzAekvXlAebXrYo"

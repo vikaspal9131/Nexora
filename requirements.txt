@@ -1,0 +1,5 @@
+Flask
+flask-session
+PyMuPDF
+python-docx
+google-generativeai
