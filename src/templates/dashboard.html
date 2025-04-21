@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
-    <header class=" flex justify-between  p-4 text-left text-xl  shadow-md">
+    <header class=" flex justify-between p-4 text-left text-xl shadow-md">
         <div class="px-6"> <i class="ri-artboard-2-line"></i> Nexora</div>
         <div class="w-[34px] mr-[40px]">
             <img id="userPhoto" src="" alt="">
@@ -37,24 +37,46 @@
             <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Match Percentage Analysis</button>
         </div>
         <div class="w-full md:w-full rounded-lg mt-4 md:mt-0 px-12">
-            <header class="flex gap-8 text-[13px] font-[300] cursor-pointer ">
-                <p> Overall</p>
-                <h1>Notable Gaps</h1>
-                <h1>Recommendations</h1>
-                <h1>Final Verdict </h1>
-                <h1>Areas for Improvement</h1>
-                <h1>Keywords Found</h1>
+            <header class="flex gap-8 text-[13px] font-[300] cursor-pointer " id="tabs">
+                <p data-tab="overall">Overall</p>
+                <h1 data-tab="gaps">Notable Gaps</h1>
+                <h1 data-tab="recommendations">Recommendations</h1>
+                <h1 data-tab="verdict">Final Verdict</h1>
+                <h1 data-tab="improvements">Areas for Improvement</h1>
+                <h1 data-tab="keywords">Keywords Found</h1>
             </header>
-            <div class="h-[600px] overflow-y-auto mt-4">
-                
-                <p class="text-gray-400 text-center items-center mt-[300px]">Data Unavailable for Analysis here...</p>
+            <div id="tab-contents" class="h-[600px] overflow-y-auto mt-4 text-sm text-gray-300">
+                <div id="overall" class="tab-pane hidden">Overall analysis content goes here...</div>
+                <div id="gaps" class="tab-pane hidden">Notable gaps in resume...</div>
+                <div id="recommendations" class="tab-pane hidden">Personalized recommendations...</div>
+                <div id="verdict" class="tab-pane hidden">Final verdict and conclusion...</div>
+                <div id="improvements" class="tab-pane hidden">Suggested areas for improvement...</div>
+                <div id="keywords" class="tab-pane hidden">Keywords matched from JD...</div>
+                <p id="default-msg" class="text-gray-400 text-center mt-[300px]">Data Unavailable for Analysis here...</p>
             </div>
         </div>
     </div>
+
+    <script>
+        const tabs = document.querySelectorAll('#tabs [data-tab]');
+        const panes = document.querySelectorAll('.tab-pane');
+        const defaultMsg = document.getElementById('default-msg');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+
+                // Hide all panes
+                panes.forEach(pane => pane.classList.add('hidden'));
+
+                // Show the clicked tab's content
+                const activePane = document.getElementById(target);
+                if (activePane) {
+                    activePane.classList.remove('hidden');
+                    defaultMsg.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
-<script src="./script/firebase.js" type="module"></script>
-<script src="./script/github_login.js" type="module"></script>
-<script src="./script/dashbord.js"></script>
 </html>
-
-
