@@ -1,34 +1,68 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const dropArea = document.getElementById("drop-area");
-  const fileInput = document.getElementById("file-input");
-  const fileNameDisplay = document.getElementById("file-name");
-  
-  dropArea.addEventListener("click", () => {
-      fileInput.click();
-  });
+const tabs = document.querySelectorAll('#tabs [data-tab]');
+const panes = document.querySelectorAll('.tab-pane');
+const defaultMsg = document.getElementById('default-msg');
 
-  dropArea.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      dropArea.classList.add("border-blue-500");
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    panes.forEach(pane => pane.classList.add('hidden'));
+    const activePane = document.getElementById(target);
+    if (activePane) {
+      activePane.classList.remove('hidden');
+      defaultMsg.style.display = 'none';
+    }
   });
-  
-  dropArea.addEventListener("dragleave", () => {
-      dropArea.classList.remove("border-blue-500");
-  });
-  
-  dropArea.addEventListener("drop", (event) => {
-      event.preventDefault();
-      dropArea.classList.remove("border-blue-500");
-      
-      if (event.dataTransfer.files.length) {
-          fileInput.files = event.dataTransfer.files;
-          fileNameDisplay.textContent = event.dataTransfer.files[0].name;
-      }
-  });
+});
 
-  fileInput.addEventListener("change", (event) => {
-      if (event.target.files.length) {
-          fileNameDisplay.textContent = event.target.files[0].name;
-      }
+// Drop area file trigger
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("file-input");
+const fileNameDisplay = document.getElementById("file-name");
+
+dropArea.addEventListener("click", () => fileInput.click());
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  fileNameDisplay.textContent = file ? file.name : "No file selected";
+});
+
+// Form submit handler
+document.getElementById('resumeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch('/analyze/', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(err => { throw new Error(err.error || "Unknown error"); });
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Fill each tab with bullet point list
+    const fillTab = (id, content) => {
+      const el = document.getElementById(id);
+      el.innerHTML = Array.isArray(content)
+        ? '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>'
+        : `<p>${content}</p>`;
+    };
+
+    fillTab('overall', data.Overall);
+    fillTab('gaps', data["Notable Gaps"]);
+    fillTab('recommendations', data.Recommendations);
+    fillTab('verdict', data["Final Verdict"]);
+    fillTab('improvements', data["Areas for Improvement"]);
+    fillTab('keywords', data["Keywords Found"]);
+
+    document.getElementById('overall').classList.remove('hidden');
+    defaultMsg.style.display = 'none';
+  })
+  .catch(error => {
+    alert("Error: " + error.message);
   });
 });

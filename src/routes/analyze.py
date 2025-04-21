@@ -23,7 +23,17 @@ def analyze():
     else:
         return jsonify({"error": "Unsupported file format. Upload PDF or DOCX."}), 400
 
-    # Analyze resume
+    # Analyze resume (analyze_resume now returns a dictionary)
     analysis_result = analyze_resume(job_role, resume_text)
 
-    return jsonify({"analysis": analysis_result})
+    # Return the analysis in the desired JSON format
+    response = {
+        "Overall": analysis_result.get("overall", "No overall analysis available"),
+        "Notable Gaps": analysis_result.get("notable_gaps", "No notable gaps identified"),
+        "Recommendations": analysis_result.get("recommendations", "No recommendations available"),
+        "Final Verdict": analysis_result.get("final_verdict", "No final verdict available"),
+        "Areas for Improvement": analysis_result.get("areas_for_improvement", "No areas for improvement identified"),
+        "Keywords Found": analysis_result.get("keywords_found", [])
+    }
+
+    return jsonify(response)

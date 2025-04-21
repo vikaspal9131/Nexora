@@ -1,82 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexora-dashboard</title>
-    <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora-dashboard</title>
+  <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="/src/assets/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
-    <header class=" flex justify-between p-4 text-left text-xl shadow-md">
-        <div class="px-6"> <i class="ri-artboard-2-line"></i> Nexora</div>
-        <div class="w-[34px] mr-[40px]">
-            <img id="userPhoto" src="" alt="">
+  <header class="flex justify-between p-4 text-left text-xl shadow-md">
+    <div class="px-6"><i class="ri-artboard-2-line"></i> Nexora</div>
+    <div class="w-[34px] mr-[40px]">
+      <img id="userPhoto" src="" alt="">
+    </div>
+  </header>
+
+  <div class="flex flex-col md:flex-row flex-1 p-4 gap-4">
+    <div id="left-sidebar" class="w-full md:w-1/2 shadow-md px-6">
+      <h2 class="text-xl mb-8 font-[300]">Upload Resume & Job Description</h2>
+
+      <form id="resumeForm" enctype="multipart/form-data">
+        <label class="block mb-2 text-sm text-gray-300 font-[200]">Upload PDF</label>
+        <div id="drop-area" class="w-full bg-black h-32 p-6 border-[1px] border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
+          <i class="ri-folder-upload-fill"></i>
+          <span class="text-gray-400 font-[300]">Drag & Drop PDF here or Click to Upload</span>
+          <input id="file-input" name="resume" type="file" accept="application/pdf" class="hidden" required>
         </div>
-    </header>
-    <div class="flex flex-col md:flex-row flex-1 p-4 gap-4">
-        <div id="left-sidebar" class="w-full md:w-1/2 shadow-md px-6 ">
-            <h2 class="text-xl mb-8 font-[300]">Upload Resume & Job Description</h2>
-            <label class="block mb-2 text-sm text-gray-300 font-[200]">Upload PDF</label>
-            <div id="drop-area" class="w-full bg-black h-32 p-6 border-[1px] border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
-                <i class="ri-folder-upload-fill"></i>
-                <span class="text-gray-400 font-[300]">Drag & Drop PDF here or Click to Upload</span>
-                <input id="file-input" type="file" accept="application/pdf" class="hidden">
-            </div>
-            <p id="file-name" class="text-sm text-gray-400 mt-8"></p>
-            <label class="block mb-2 text-sm font-[200] bg-transparent">Description</label>
-            <textarea class="w-[500px] h-[248px] p-2 border-[1px] rounded-md h-32 bg-transparent  text-gray-200" placeholder="Past the job description..."></textarea>
-            <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Detailed Resume Review</button>
-            <button class="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full">Match Percentage Analysis</button>
-        </div>
-        <div class="w-full md:w-full rounded-lg mt-4 md:mt-0 px-12">
-            <header class="flex gap-8 text-[13px] font-[300] cursor-pointer " id="tabs">
-                <p data-tab="overall">Overall</p>
-                <h1 data-tab="gaps">Notable Gaps</h1>
-                <h1 data-tab="recommendations">Recommendations</h1>
-                <h1 data-tab="verdict">Final Verdict</h1>
-                <h1 data-tab="improvements">Areas for Improvement</h1>
-                <h1 data-tab="keywords">Keywords Found</h1>
-            </header>
-            <div id="tab-contents" class="h-[600px] overflow-y-auto mt-4 text-sm text-gray-300">
-                <div id="overall" class="tab-pane hidden">Overall analysis content goes here...</div>
-                <div id="gaps" class="tab-pane hidden">Notable gaps in resume...</div>
-                <div id="recommendations" class="tab-pane hidden">Personalized recommendations...</div>
-                <div id="verdict" class="tab-pane hidden">Final verdict and conclusion...</div>
-                <div id="improvements" class="tab-pane hidden">Suggested areas for improvement...</div>
-                <div id="keywords" class="tab-pane hidden">Keywords matched from JD...</div>
-                <p id="default-msg" class="text-gray-400 text-center mt-[300px]">Data Unavailable for Analysis here...</p>
-            </div>
-        </div>
+        <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
+
+        <label class="block mb-2 text-sm font-[200] bg-transparent mt-6">Job Role</label>
+        <input type="text" name="job_role" id="job_role" class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white" placeholder="e.g., Frontend Developer" required>
+
+        <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full">Detailed Resume Review</button>
+      </form>
     </div>
 
-    <script>
-        const tabs = document.querySelectorAll('#tabs [data-tab]');
-        const panes = document.querySelectorAll('.tab-pane');
-        const defaultMsg = document.getElementById('default-msg');
+    <div class="w-full md:w-full rounded-lg mt-4 md:mt-0 px-12">
+      <header class="flex gap-8 text-[13px] font-[300] cursor-pointer" id="tabs">
+        <p data-tab="overall">Overall</p>
+        <h1 data-tab="gaps">Notable Gaps</h1>
+        <h1 data-tab="recommendations">Recommendations</h1>
+        <h1 data-tab="verdict">Final Verdict</h1>
+        <h1 data-tab="improvements">Areas for Improvement</h1>
+        <h1 data-tab="keywords">Keywords Found</h1>
+      </header>
+      <div id="tab-contents" class="h-[600px] overflow-y-auto mt-4 text-sm text-gray-300">
+        <div id="overall" class="tab-pane hidden"></div>
+        <div id="gaps" class="tab-pane hidden"></div>
+        <div id="recommendations" class="tab-pane hidden"></div>
+        <div id="verdict" class="tab-pane hidden"></div>
+        <div id="improvements" class="tab-pane hidden"></div>
+        <div id="keywords" class="tab-pane hidden"></div>
+        <p id="default-msg" class="text-gray-400 text-center mt-[300px]">Data Unavailable for Analysis here...</p>
+      </div>
+    </div>
+  </div>
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.tab;
+  <script>
+    const tabs = document.querySelectorAll('#tabs [data-tab]');
+const panes = document.querySelectorAll('.tab-pane');
+const defaultMsg = document.getElementById('default-msg');
 
-                // Hide all panes
-                panes.forEach(pane => pane.classList.add('hidden'));
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    panes.forEach(pane => pane.classList.add('hidden'));
+    const activePane = document.getElementById(target);
+    if (activePane) {
+      activePane.classList.remove('hidden');
+      defaultMsg.style.display = 'none';
+    }
+  });
+});
 
-                // Show the clicked tab's content
-                const activePane = document.getElementById(target);
-                if (activePane) {
-                    activePane.classList.remove('hidden');
-                    defaultMsg.style.display = 'none';
-                }
-            });
-        });
-    </script>
+// Drop area file trigger
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("file-input");
+const fileNameDisplay = document.getElementById("file-name");
+
+dropArea.addEventListener("click", () => fileInput.click());
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  fileNameDisplay.textContent = file ? file.name : "No file selected";
+});
+
+// Form submit handler
+document.getElementById('resumeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch('/analyze/', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(err => { throw new Error(err.error || "Unknown error"); });
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Fill each tab with bullet point list
+    const fillTab = (id, content) => {
+      const el = document.getElementById(id);
+      el.innerHTML = Array.isArray(content)
+        ? '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>'
+        : `<p>${content}</p>`;
+    };
+
+    fillTab('overall', data.Overall);
+    fillTab('gaps', data["Notable Gaps"]);
+    fillTab('recommendations', data.Recommendations);
+    fillTab('verdict', data["Final Verdict"]);
+    fillTab('improvements', data["Areas for Improvement"]);
+    fillTab('keywords', data["Keywords Found"]);
+
+    document.getElementById('overall').classList.remove('hidden');
+    defaultMsg.style.display = 'none';
+  })
+  .catch(error => {
+    alert("Error: " + error.message);
+  });
+});
+   
+  </script>
 </body>
 </html>
+
+
+
