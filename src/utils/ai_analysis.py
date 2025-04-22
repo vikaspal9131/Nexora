@@ -35,7 +35,7 @@ def analyze_resume(job_role, resume_text):
 
     5. **final_verdict**: 
        - Final recommendation: Suitable or Not Suitable for the role.
-       - Mention if an interview is recommended.
+       - Or give he adlines like “Needs improvement” or “Good fit with minor tweaks”.
 
     6. **areas_for_improvement**: 
        - Point out sections that need clarity, more examples, or better structure.

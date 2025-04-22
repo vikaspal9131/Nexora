@@ -78,6 +78,10 @@ header{
   width: 300px;
 }
 
+#job_role::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 
   </style>
 </head>
@@ -144,7 +148,9 @@ header{
         <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
 
         <label class="block mt-6 mb-2 text-sm font-light">Job Role</label>
-        <textarea name="job_role" id="job_role" rows="3" class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white" placeholder="e.g., Frontend Developer" required></textarea>
+        <textarea name="job_role" id="job_role" rows="3"
+        class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white resize-none overflow-y-auto"
+        placeholder="e.g., Frontend Developer" required></textarea>
 
         <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full">
           Detailed Resume Review
@@ -241,7 +247,7 @@ document.getElementById('resumeForm').addEventListener('submit', function(e) {
     defaultMsg.style.display = 'none';
   })
   .catch(error => {
-    console.error("❌ Error:", error);
+    console.error(" Error:", error);
     alert("Error: " + error.message);
   });
 });
