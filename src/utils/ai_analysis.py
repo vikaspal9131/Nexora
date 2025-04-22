@@ -13,6 +13,8 @@ def analyze_resume(job_role, resume_text):
 
     Evaluate the following candidate's resume for the role of **{job_role}**. Provide a **detailed professional review** with real examples from the resume.
 
+    Also, as an ATS (Applicant Tracking System) expert, analyze the resume from an ATS standpoint.
+
     Structure the JSON response as follows:
 
     1. **overall**: 
@@ -41,6 +43,21 @@ def analyze_resume(job_role, resume_text):
     7. **keywords_found**: 
        - List relevant keywords found from job description (e.g., HTML, Git, REST API).
 
+    8. **match_percentage**: 
+       - Overall match percentage between resume and job role (e.g., 82%).
+
+    9. **matched_keywords**: 
+       - List of key matching keywords found in the resume.
+
+    10. **missing_keywords**: 
+        - Important keywords missing based on job role expectations.
+
+    11. **skills_gap**: 
+        - List of skills the candidate lacks or hasn’t clearly demonstrated for the role.
+
+    12. **ats_recommendations**: 
+        - Suggestions to improve ATS-friendliness of the resume (e.g., formatting tips, keyword enhancements, structural clarity).
+
     Resume:
     {resume_text}
     """
@@ -48,7 +65,6 @@ def analyze_resume(job_role, resume_text):
     response = model.generate_content(prompt)
 
     try:
-        # Remove formatting if Gemini returns with ```json blocks
         cleaned_text = re.sub(r"```json|```", "", response.text).strip()
         full_data = json.loads(cleaned_text)
 
@@ -59,7 +75,12 @@ def analyze_resume(job_role, resume_text):
             "recommendations": full_data.get("recommendations", []),
             "final_verdict": full_data.get("final_verdict", "Not found"),
             "areas_for_improvement": full_data.get("areas_for_improvement", []),
-            "keywords_found": full_data.get("keywords_found", [])
+            "keywords_found": full_data.get("keywords_found", []),
+            "match_percentage": full_data.get("match_percentage", "Not found"),
+            "matched_keywords": full_data.get("matched_keywords", []),
+            "missing_keywords": full_data.get("missing_keywords", []),
+            "skills_gap": full_data.get("skills_gap", []),
+            "ats_recommendations": full_data.get("ats_recommendations", [])
         }
     except json.JSONDecodeError:
         return {
@@ -69,5 +90,10 @@ def analyze_resume(job_role, resume_text):
             "recommendations": [],
             "final_verdict": "Unable to extract",
             "areas_for_improvement": [],
-            "keywords_found": []
+            "keywords_found": [],
+            "match_percentage": "Unable to extract",
+            "matched_keywords": [],
+            "missing_keywords": [],
+            "skills_gap": [],
+            "ats_recommendations": []
         }

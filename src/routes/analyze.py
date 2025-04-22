@@ -4,7 +4,7 @@ from utils.ai_analysis import analyze_resume
 
 analyze_bp = Blueprint('analyze', __name__)
 
-@analyze_bp.route('/', methods=['POST'])  # Changed from '/analyze' to '/'
+@analyze_bp.route('/', methods=['POST'])
 def analyze():
     if 'resume' not in request.files or 'job_role' not in request.form:
         return jsonify({"error": "Missing resume file or job role"}), 400
@@ -15,7 +15,7 @@ def analyze():
     if resume_file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # Extract text based on file type
+    # Extract resume text
     if resume_file.filename.endswith('.pdf'):
         resume_text = extract_text_from_pdf(resume_file)
     elif resume_file.filename.endswith('.docx'):
@@ -23,17 +23,23 @@ def analyze():
     else:
         return jsonify({"error": "Unsupported file format. Upload PDF or DOCX."}), 400
 
-    # Analyze resume (analyze_resume now returns a dictionary)
+    # Analyze resume with Gemini (or any analysis function)
     analysis_result = analyze_resume(job_role, resume_text)
 
-    # Return the analysis in the desired JSON format
+    # Full response to match frontend JS expectations
     response = {
-        "Overall": analysis_result.get("overall", "No overall analysis available"),
-        "Notable Gaps": analysis_result.get("notable_gaps", "No notable gaps identified"),
-        "Recommendations": analysis_result.get("recommendations", "No recommendations available"),
-        "Final Verdict": analysis_result.get("final_verdict", "No final verdict available"),
-        "Areas for Improvement": analysis_result.get("areas_for_improvement", "No areas for improvement identified"),
-        "Keywords Found": analysis_result.get("keywords_found", [])
+        "Overall": analysis_result.get("overall", ""),
+        "Notable Gaps": analysis_result.get("notable_gaps", []),
+        "Recommendations": analysis_result.get("recommendations", []),
+        "Final Verdict": analysis_result.get("final_verdict", ""),
+        "Areas for Improvement": analysis_result.get("areas_for_improvement", []),
+        "Keywords Found": analysis_result.get("keywords_found", []),
+        "Key Strengths": analysis_result.get("key_strengths", []),
+        "Match Percentage": analysis_result.get("match_percentage", "N/A"),
+        "Matched Keywords": analysis_result.get("matched_keywords", []),
+        "Missing Keywords": analysis_result.get("missing_keywords", []),
+        "Skills Gap": analysis_result.get("skills_gap", []),
+        "ATS Recommendations": analysis_result.get("ats_recommendations", [])
     }
 
     return jsonify(response)

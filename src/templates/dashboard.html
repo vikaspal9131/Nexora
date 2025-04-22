@@ -5,132 +5,248 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nexora-dashboard</title>
   <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
-  <link rel="stylesheet" href="/src/assets/css/style.css">
+  <!-- <link rel="stylesheet" href="/src/assets/css/style.css"> -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* <!-- Locomotive Scroll CSS --> */
+@import url("https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.css");
+
+
+/* Remix icon CDN  */
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
+
+
+/* Google font CDN */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+#head{
+  font-family: "Forum", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 90px ;
+  line-height: 90px;
+  margin-top: 80px;
+}
+
+#side {
+  font-family: "Forum", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 60px ;
+  line-height: 50px;
+  margin-top: 80px;
+  /* font-family: "Lexend", sans-serif; */
+  letter-spacing: -2.2px;
+ 
+}
+header{
+  font-family: "Lexend", sans-serif;
+  font-size: 11px;
+}
+#del{
+   font-family: "Lexend", sans-serif;
+   letter-spacing: -1px;
+   padding-left: 80px;
+   padding-right: 80px;
+  
+}
+
+#middle{
+  width: 90%;
+}
+
+#left-sidebar{
+  padding: 10px 20px 0px 20px;
+  background: #212121;
+  border-radius: 5px;
+}
+
+#job_role {
+  height: 260px; /* Fixed height */
+  resize: none; 
+  
+}
+header{
+  border-bottom: 1px solid #333;
+}
+
+#leftbar{
+  border-right: 1px solid #333; 
+  width: 300px;
+}
+
+
+  </style>
 </head>
 <body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
-  <header class="flex justify-between p-4 text-left text-xl shadow-md">
-    <div class="px-6"><i class="ri-artboard-2-line"></i> Nexora</div>
-    <div class="w-[34px] mr-[40px]">
-      <img id="userPhoto" src="" alt="">
+  <header class="flex justify-between items-center py-4 px-6 text-xl shadow-md">
+    <div><i class="ri-artboard-2-line"></i> Nexora</div>
+    <nav class="hidden md:flex text-xs gap-6">
+      <a href="#" class="hover:underline">PRODUCT</a>
+      <a href="#" class="hover:underline">TOOL</a>
+      <a href="#" class="hover:underline">FEATURE</a>
+      <a href="#" class="hover:underline">ABOUT</a>
+    </nav>
+    <div class="w-[34px]">
+      <img id="userPhoto" src="https://avatars.githubusercontent.com/u/113900393?v=4" alt="user" class="rounded-full" />
     </div>
   </header>
 
-  <div class="flex flex-col md:flex-row flex-1 p-4 gap-4">
-    <div id="left-sidebar" class="w-full md:w-1/2 shadow-md px-6">
-      <h2 class="text-xl mb-8 font-[300]">Upload Resume & Job Description</h2>
+  <div  class="flex flex-col md:flex-row flex-1 gap-4 px-6 py-4 overflow-hidden">
+    <!-- Sidebar -->
+    <div id="leftbar" class="md:w-[160px] w-full  overflow-x-auto md:overflow-visible w-[300px]">
+      <div class="flex md:flex-col gap-8 text-sm font-light cursor-pointer" id="tabs">
+        <p data-tab="overall">Overall</p>
+        <p data-tab="gaps">Notable Gaps</p>
+        <p data-tab="match_percentage">Match %</p>
+        <p data-tab="key_strengths">Key Strengths</p>
+        <p data-tab="skills_gap">Skills Gap</p>
+        <p data-tab="recommendations">Recommendations</p>
+        <p data-tab="keywords">Keywords Found</p>
+        <p data-tab="matched_keywords">Matched Keywords</p>
+        <p data-tab="missing_keywords">Missing Keywords</p>
+        <p data-tab="improvements">Areas for Improvement</p>
+        <p data-tab="ats_recommendations">ATS Recommendations</p>
+        <p data-tab="final_verdict">Final verdict</p>
+      </div>
+    </div>
 
+    <!-- Tab Content -->
+    <main id="tab-contents" class="h-[600px] w-full overflow-y-auto text-sm text-gray-300 ">
+      <div id="overall" class="tab-pane hidden"></div>
+      <div id="gaps" class="tab-pane hidden"></div>
+      <div id="match_percentage" class="tab-pane hidden"></div>
+      <div id="key_strengths" class="tab-pane hidden"></div>
+      <div id="skills_gap" class="tab-pane hidden"></div>
+      <div id="recommendations" class="tab-pane hidden"></div>
+      <div id="keywords" class="tab-pane hidden"></div>
+      <div id="matched_keywords" class="tab-pane hidden"></div>
+      <div id="missing_keywords" class="tab-pane hidden"></div>
+      <div id="improvements" class="tab-pane hidden"></div>
+      <div id="ats_recommendations" class="tab-pane hidden"></div>
+      <div id="final_verdict" class="tab-pane hidden"></div>
+      <p id="default-msg" class="text-gray-400 text-center mt-32">Data Unavailable for Analysis here...</p>
+    </main>
+
+    <!-- Upload Form -->
+    <section id="left-sidebar" class="md:w-1/2 w-full px-4 md:px-6">
+      <h2 class="text-xl mb-8 font-light">Upload Resume & Job Description</h2>
       <form id="resumeForm" enctype="multipart/form-data">
-        <label class="block mb-2 text-sm text-gray-300 font-[200]">Upload PDF</label>
-        <div id="drop-area" class="w-full bg-black h-32 p-6 border-[1px] border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
-          <i class="ri-folder-upload-fill"></i>
-          <span class="text-gray-400 font-[300]">Drag & Drop PDF here or Click to Upload</span>
+        <label class="block mb-2 text-sm font-light text-gray-300">Upload PDF</label>
+        <div id="drop-area" class="w-full h-32 p-6 border border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
+          <i class="ri-folder-upload-fill text-2xl mb-2"></i>
+          <span class="text-gray-400 font-light">Drag & Drop PDF here or Click to Upload</span>
           <input id="file-input" name="resume" type="file" accept="application/pdf" class="hidden" required>
         </div>
         <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
 
-        <label class="block mb-2 text-sm font-[200] bg-transparent mt-6">Job Role</label>
-        <input type="text" name="job_role" id="job_role" class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white" placeholder="e.g., Frontend Developer" required>
+        <label class="block mt-6 mb-2 text-sm font-light">Job Role</label>
+        <textarea name="job_role" id="job_role" rows="3" class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white" placeholder="e.g., Frontend Developer" required></textarea>
 
-        <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full">Detailed Resume Review</button>
+        <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full">
+          Detailed Resume Review
+        </button>
       </form>
-    </div>
-
-    <div class="w-full md:w-full rounded-lg mt-4 md:mt-0 px-12">
-      <header class="flex gap-8 text-[13px] font-[300] cursor-pointer" id="tabs">
-        <p data-tab="overall">Overall</p>
-        <h1 data-tab="gaps">Notable Gaps</h1>
-        <h1 data-tab="recommendations">Recommendations</h1>
-        <h1 data-tab="verdict">Final Verdict</h1>
-        <h1 data-tab="improvements">Areas for Improvement</h1>
-        <h1 data-tab="keywords">Keywords Found</h1>
-      </header>
-      <div id="tab-contents" class="h-[600px] overflow-y-auto mt-4 text-sm text-gray-300">
-        <div id="overall" class="tab-pane hidden"></div>
-        <div id="gaps" class="tab-pane hidden"></div>
-        <div id="recommendations" class="tab-pane hidden"></div>
-        <div id="verdict" class="tab-pane hidden"></div>
-        <div id="improvements" class="tab-pane hidden"></div>
-        <div id="keywords" class="tab-pane hidden"></div>
-        <p id="default-msg" class="text-gray-400 text-center mt-[300px]">Data Unavailable for Analysis here...</p>
-      </div>
-    </div>
+    </section>
   </div>
 
   <script>
-    const tabs = document.querySelectorAll('#tabs [data-tab]');
+  
+
+    // File Upload
+const tabs = document.querySelectorAll('#tabs [data-tab]');
 const panes = document.querySelectorAll('.tab-pane');
 const defaultMsg = document.getElementById('default-msg');
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     const target = tab.dataset.tab;
-    panes.forEach(pane => pane.classList.add('hidden'));
-    const activePane = document.getElementById(target);
-    if (activePane) {
-      activePane.classList.remove('hidden');
+    panes.forEach(p => p.classList.add('hidden'));
+    const active = document.getElementById(target);
+    if (active) {
+      active.classList.remove('hidden');
       defaultMsg.style.display = 'none';
     }
   });
 });
 
-// Drop area file trigger
+// File Upload
 const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("file-input");
 const fileNameDisplay = document.getElementById("file-name");
 
 dropArea.addEventListener("click", () => fileInput.click());
-
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
-  fileNameDisplay.textContent = file ? file.name : "No file selected";
+  fileNameDisplay.textContent = file ? file.name : "";
 });
 
-// Form submit handler
+// Form Submit
 document.getElementById('resumeForm').addEventListener('submit', function(e) {
   e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
+  const formData = new FormData(this);
 
   fetch('/analyze/', {
     method: 'POST',
     body: formData
   })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(err => { throw new Error(err.error || "Unknown error"); });
-    }
-    return response.json();
+  .then(res => {
+    if (!res.ok) return res.json().then(err => { throw new Error(err.error || "Unknown error"); });
+    return res.json();
   })
   .then(data => {
-    // Fill each tab with bullet point list
+    console.log('API Response:', data); // Log the full API response for debugging
+
     const fillTab = (id, content) => {
       const el = document.getElementById(id);
-      el.innerHTML = Array.isArray(content)
-        ? '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>'
-        : `<p>${content}</p>`;
+      if (!el) return;
+
+      // Ensure the content is not null/undefined
+      if (content === null || content === undefined) {
+        el.innerHTML = "<p>Data not available</p>";
+        return;
+      }
+
+      // If content is an array, format it into a list
+      if (Array.isArray(content)) {
+        if (content.length === 0) {
+          el.innerHTML = "<p>No items available</p>";
+        } else {
+          el.innerHTML = '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>';
+        }
+      } else {
+        // If content is a string or any other type
+        el.innerHTML = `<p>${content || "Not available"}</p>`;
+      }
     };
 
     fillTab('overall', data.Overall);
     fillTab('gaps', data["Notable Gaps"]);
+    fillTab('match_percentage', data["Match Percentage"]);
+    fillTab('key_strengths', data["Key Strengths"]);
+    fillTab('skills_gap', data["Skills Gap"]);
     fillTab('recommendations', data.Recommendations);
-    fillTab('verdict', data["Final Verdict"]);
-    fillTab('improvements', data["Areas for Improvement"]);
     fillTab('keywords', data["Keywords Found"]);
+    fillTab('matched_keywords', data["Matched Keywords"]);
+    fillTab('missing_keywords', data["Missing Keywords"]);
+    fillTab('improvements', data["Areas for Improvement"] || data["Improvements"]);
+    fillTab('ats_recommendations', data["ATS Recommendations"]);
+    fillTab('final_verdict', data["Final Verdict"]);
 
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
     document.getElementById('overall').classList.remove('hidden');
     defaultMsg.style.display = 'none';
   })
   .catch(error => {
+    console.error("❌ Error:", error);
     alert("Error: " + error.message);
   });
 });
-   
+
+
   </script>
 </body>
 </html>
-
-
-
