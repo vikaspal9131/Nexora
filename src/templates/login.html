@@ -1,43 +1,53 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexora-Log in</title>
-    <link rel="shortcut icon" href="/src/assets/images/fevicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/src/assets/css/cdn.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-</head>
-<body  class="h-full flex items-center justify-center font-[lexend]">
-    <div id="loader" style="display: none; text-align: center;">
-        <p>Loading...</p>
-    </div>
-    <h1 class="absolute top-5 left-5 text-[30px] text-black bg-transparent z-10 ">
-        <i class="ri-artboard-2-line"></i>  Nexora
-    </h1>
-  
-   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexora - Log in</title>
+  <link rel="shortcut icon" href="/src/assets/images/fevicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="/src/assets/css/cdn.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <div class="w-full  flex items-center justify-center ">
-        <div class="max-w-md w-full px-[10px]">
-            <h1 class="text-center text-[50px]"><i class="ri-artboard-2-line"></i></h1>
-            <h2 class="text-2xl font-[Lexend] text-black text-center">Welcome to Nexora </h2>   
-            <div class="my-6 flex items-center">
-                <hr class="flex-grow border-gray-300">
-                <hr class="flex-grow border-gray-300">
-            </div>
-            <button id="google-btn" class="w-full p-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 mb-3">
-                <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" class="w-5">
-                <span>Log in with Google</span>
-            </button>
-            <button id="github-btn" class="w-full p-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 mb-3">
-                <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="Github" class="w-5">
-                <span>Log in with Github</span>
-            </button>
-         
-        </div>
-    </div>    
+</head>
+<body class="h-screen flex items-center justify-center font-[lexend]">
+
+  <div id="loader" style="display: none; text-align: center;">
+    <p>Loading...</p>
+  </div>
+
+  <h1 class="absolute top-5 left-5 text-[30px] text-black bg-transparent z-10">
+    <i class="ri-artboard-2-line"></i> Nexora
+  </h1>
+
+  <div class="w-full flex items-center justify-center">
+    <div class="max-w-md w-full px-[10px]">
+      <h1 class="text-center text-[50px]"><i class="ri-artboard-2-line"></i></h1>
+      <h2 class="text-2xl font-[Lexend] text-black text-center">Welcome to Nexora</h2>
+
+      <div class="my-6 flex items-center">
+        <hr class="flex-grow border-gray-300">
+        <hr class="flex-grow border-gray-300">
+      </div>
+
+      <button id="google-btn" class="w-full p-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 mb-3">
+        <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" class="w-5">
+        <span>Log in with Google</span>
+      </button>
+
+      <button id="github-btn" class="w-full p-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 mb-3">
+        <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="Github" class="w-5">
+        <span>Log in with Github</span>
+      </button>
+    </div>
+  </div>
+
+  
 </body>
-<script src="/src/script/firebase.js" type="module"></script>
-<script src="/src/script/github_login.js" type="module"></script>
+
+<script type="module">
+  
+</script>
+<script type="module" src="{{ url_for('static', filename='js/googleOAuth.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/gitOauth.js') }}"></script>
 </html>

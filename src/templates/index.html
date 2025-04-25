@@ -4,82 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" href="/src/assets/images/fevicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/src/assets/css/cdn.css">
-    <link rel="stylesheet" href="/src/assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        /* <!-- Locomotive Scroll CSS --> */
-    @import url("https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.css");
-    
-    
-    /* Remix icon CDN  */
-    @import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
-    
-    
-    /* Google font CDN */
-    @import url('https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
-    
-    
-    #head{
-      font-family: "Forum", serif;
-      font-weight: 500;
-      font-style: normal;
-      font-size: 90px ;
-      line-height: 90px;
-      margin-top: 80px;
-    }
-    
-    #side {
-      font-family: "Forum", serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 60px ;
-      line-height: 50px;
-      margin-top: 80px;
-      /* font-family: "Lexend", sans-serif; */
-      letter-spacing: -2.2px;
-     
-    }
-    header{
-      font-family: "Lexend", sans-serif;
-      font-size: 11px;
-    }
-    #del{
-       font-family: "Lexend", sans-serif;
-       letter-spacing: -1px;
-       padding-left: 80px;
-       padding-right: 80px;
-      
-    }
-    
-    #middle{
-      width: 90%;
-    }
-    
-  
-      </style>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
-<body class="bg-white text-black">
+
+<body class="loading" class="bg-white text-black">
+    <div class="loader-screen">
+        <div class="loader"> </div> 
+    </div>
 <div id="main">
     <header class="flex justify-between items-center p-6">
         <h1 class="text-2xl"><i class="ri-artboard-2-line"></i> Nexora</h1>
         <nav class="hidden md:flex space-x-6 font-semibold ">
-            <a href="#" class="hover:underline">PRODUCT</a>
-            <a href="#" class="hover:underline">TOOL</a>
+            <a href="#" class="hover:underline">HOME</a>
+            <a href="#" class="hover:underline">TEMPLATES</a>
             <a href="#" class="hover:underline">FEATURE</a>
             <a href="#" class="hover:underline">ABOUT</a>
         </nav>
-    <a href="./login.html" class="border border-black rounded-full px-4 py-2 text-sm">Get Started</a>
+
+    <a href="/dashboard"
+    class="border border-black rounded-full px-4 py-2 text-sm hover:bg-black hover:text-white transition">
+    Get started
+</a>
     </header>
 
     <section class="text-center px-6 mt-[150px] mb-[170px]">
@@ -89,28 +37,16 @@
         <p class="mt-4 mb-8 text-lg md:text-xl">
             Bridging talent and opportunity by turning ordinary resumes into job-winning documents with AI precision
         </p>
-        <a href="./dashboard"
-            class=" px-6 py-2 text-black border border-black rounded-full text-lg hover:bg-black hover:text-white transition">
-            Our Tool
+        <a href="/dashboard"
+            class=" px-6 py-2 bg-black text-white border border-black rounded-full text-lg hover:bg-white hover:text-black transition">
+            Our Dashboard
         </a>
     </section>
 
     <div class="mt-12 px-8 flex">
-      
-        <!-- <img src="./tesdd.jpg" alt="Team Work" class="w-full h-auto rounded-lg "> -->
-        <video class=" w-[700px] rounded-lg shadow-lg" autoplay muted loop playsinline preload="metadata">
-            <source src="/src/assets/video/test.webm" type="video/webm">
-            <source src="/src/assets/video/test.mp4" type="video/mp4">
+        <video class="rounded-lg shadow-lg" autoplay muted loop playsinline preload="metadata">
+            <source src="{{ url_for('static', filename='assets/video/test.mp4') }}" type="video/mp4">
         </video>
-
-        <div class="px-[40px] ">
-            <h2 id="side" class="text-5xl font-serif font-bold mb-12">Nexora AI-powered tool <br> for enhancing your resume. </h2>
-            <p class="text-[20px]">1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo.</p>
-            <p class="text-[20px]">2. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo.</p>
-            <p class="text-[20px]">3. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo.</p>
-            <p class="text-[20px]">4. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo.</p>
-          
-        </div>
     </div>
 
     <section id="del" class="text-left mt-16 px-6 mb-[90px]">
@@ -164,21 +100,21 @@
         
             <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <div class="bg-black overflow-hidden">
-                    <img src="/src/assets/images/del3.webp" alt="Introducing Frames" class="w-full h-64 object-cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='assets/images/del1.webp') }}"  alt="Introducing Frames" class="w-full h-64 object-cover" loading="lazy">
                     <div class="py-4">
                         <h3 class="text-lg font-semibold">Introducing Frames</h3>
                         <p class="text-sm text-gray-400">Research / November 26, 2024</p>
                     </div>
                 </div>
                 <div class="bg-black rounded-lg overflow-hidden">
-                    <img src="/src/assets/images/del2.webp" alt="Introducing Gen-3 Alpha" class="w-full h-64 object-cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='assets/images/del3.webp') }}" class="w-full h-64 object-cover" loading="lazy">
                     <div class="py-4">
                         <h3 class="text-lg font-semibold">Introducing Gen-3 Alpha</h3>
                         <p class="text-sm text-gray-400">Research / June 18, 2024</p>
                     </div>
                 </div>
                 <div class="bg-black rounded-lg overflow-hidden">
-                    <img src="/src/assets/images/del1.webp" alt="Introducing General World Models" class="w-full h-64 object-cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='assets/images/del3.webp') }}" alt="Introducing General World Models" class="w-full h-64 object-cover" loading="lazy">
                     <div class="py-4">
                         <h3 class="text-lg font-semibold">Introducing General World Models</h3>
                         <p class="text-sm text-gray-400">Research / December 12, 2023</p>
@@ -246,7 +182,14 @@
 
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
-<script src="/src/script/smooth.js"></script>
+
+<script>
+    window.addEventListener("load", function () {
+  setTimeout(() => {
+    document.querySelector(".loader-screen").style.display = "none";
+    document.body.classList.remove("loading");
+  }, 3000); 
+});
+</script>
 </html>
 

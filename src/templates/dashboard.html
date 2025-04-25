@@ -4,105 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nexora-dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="shortcut icon" href="./assets/images/fevicon.svg" type="image/x-icon">
-  <!-- <link rel="stylesheet" href="/src/assets/css/style.css"> -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* <!-- Locomotive Scroll CSS --> */
-@import url("https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.css");
-
-
-/* Remix icon CDN  */
-@import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
-
-
-/* Google font CDN */
-@import url('https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
-
-
-#head{
-  font-family: "Forum", serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 90px ;
-  line-height: 90px;
-  margin-top: 80px;
+    .hidden {
+  display: none;
 }
-
-#side {
-  font-family: "Forum", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 60px ;
-  line-height: 50px;
-  margin-top: 80px;
-  /* font-family: "Lexend", sans-serif; */
-  letter-spacing: -2.2px;
- 
-}
-header{
-  font-family: "Lexend", sans-serif;
-  font-size: 11px;
-}
-#del{
-   font-family: "Lexend", sans-serif;
-   letter-spacing: -1px;
-   padding-left: 80px;
-   padding-right: 80px;
-  
-}
-
-#middle{
-  width: 90%;
-}
-
-#left-sidebar{
-  padding: 10px 20px 0px 20px;
-  background: #212121;
-  border-radius: 5px;
-}
-
-#job_role {
-  height: 260px; /* Fixed height */
-  resize: none; 
-  
-}
-header{
-  border-bottom: 1px solid #333;
-}
-
-#leftbar{
-  border-right: 1px solid #333; 
-  width: 300px;
-}
-
-#job_role::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-
   </style>
 </head>
-<body class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
-  <header class="flex justify-between items-center py-4 px-6 text-xl shadow-md">
+
+
+
+<body style="display: none;" class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
+  <header id="dashbord-header" class="flex justify-between items-center py-4 px-6 text-xl shadow-md">
     <div><i class="ri-artboard-2-line"></i> Nexora</div>
     <nav class="hidden md:flex text-xs gap-6">
-      <a href="#" class="hover:underline">PRODUCT</a>
-      <a href="#" class="hover:underline">TOOL</a>
+      <a href="#" class="hover:underline">HOME</a>
+      <a href="#" class="hover:underline">TEMPLATES</a>
       <a href="#" class="hover:underline">FEATURE</a>
       <a href="#" class="hover:underline">ABOUT</a>
     </nav>
     <div class="w-[34px]">
-      <img id="userPhoto" src="https://avatars.githubusercontent.com/u/113900393?v=4" alt="user" class="rounded-full" />
+      <img id="userPhoto" src="default.png" alt="user" class="rounded-full w-[34px]" />
     </div>
   </header>
 
   <div  class="flex flex-col md:flex-row flex-1 gap-4 px-6 py-4 overflow-hidden">
     <!-- Sidebar -->
-    <div id="leftbar" class="md:w-[160px] w-full  overflow-x-auto md:overflow-visible w-[300px]">
-      <div class="flex md:flex-col gap-8 text-sm font-light cursor-pointer" id="tabs">
+    <div id="leftbar" class="md:w-[160px] w-full overflow-x-auto md:overflow-visible w-[300px]">
+      <div class="flex md:flex-col gap-6 text-sm font-light cursor-pointer" id="tabs">
         <p data-tab="overall">Overall</p>
         <p data-tab="gaps">Notable Gaps</p>
         <p data-tab="match_percentage">Match %</p>
@@ -116,10 +49,22 @@ header{
         <p data-tab="ats_recommendations">ATS Recommendations</p>
         <p data-tab="final_verdict">Final verdict</p>
       </div>
+
+      <button id="logout-btn" class="mt-[80px] px-6 py-[5px] bg-white text-black rounded-[2px]">Sign out <i class="ri-logout-box-line"></i></button>
+
+      <div id="logout-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <button id="cancel-logout" class="ml-[300px] "><i class="ri-close-large-line"></i></button>
+          <h3>Are you sure you want to Sing out ?</h3>
+          <button id="confirm-logout" class="mt-6  text-white px-6 py-[5px] bg-black rounded-[4px]">Sign out </button>
+          <button id="cancel-logout" class="mt-6 text-white px-6  py-[5px] bg-black rounded-[4px]">Next time</button>
+        </div>
+      </div>
     </div>
 
     <!-- Tab Content -->
     <main id="tab-contents" class="h-[600px] w-full overflow-y-auto text-sm text-gray-300 ">
+      <div id="loader" class="loader-d hidden"></div>
       <div id="overall" class="tab-pane hidden"></div>
       <div id="gaps" class="tab-pane hidden"></div>
       <div id="match_percentage" class="tab-pane hidden"></div>
@@ -132,11 +77,11 @@ header{
       <div id="improvements" class="tab-pane hidden"></div>
       <div id="ats_recommendations" class="tab-pane hidden"></div>
       <div id="final_verdict" class="tab-pane hidden"></div>
-      <p id="default-msg" class="text-gray-400 text-center mt-32">Data Unavailable for Analysis here...</p>
+      <p id="default-msg" class="text-gray-400 text-center mt-[300px]">Data Unavailable for Analysis here...</p>
     </main>
 
     <!-- Upload Form -->
-    <section id="left-sidebar" class="md:w-1/2 w-full px-4 md:px-6">
+    <section id="left-sidebar" class="md:w-1/2 w-full  md:px-6 ">
       <h2 class="text-xl mb-8 font-light">Upload Resume & Job Description</h2>
       <form id="resumeForm" enctype="multipart/form-data">
         <label class="block mb-2 text-sm font-light text-gray-300">Upload PDF</label>
@@ -152,107 +97,15 @@ header{
         class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white resize-none overflow-y-auto"
         placeholder="e.g., Frontend Developer" required></textarea>
 
-        <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full">
+        <button type="submit" class="mt-6 bg-white text-black px-4 py-2 rounded-md w-full mb-8">
           Detailed Resume Review
         </button>
       </form>
     </section>
   </div>
-
-  <script>
-  
-
-    // File Upload
-const tabs = document.querySelectorAll('#tabs [data-tab]');
-const panes = document.querySelectorAll('.tab-pane');
-const defaultMsg = document.getElementById('default-msg');
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.dataset.tab;
-    panes.forEach(p => p.classList.add('hidden'));
-    const active = document.getElementById(target);
-    if (active) {
-      active.classList.remove('hidden');
-      defaultMsg.style.display = 'none';
-    }
-  });
-});
-
-// File Upload
-const dropArea = document.getElementById("drop-area");
-const fileInput = document.getElementById("file-input");
-const fileNameDisplay = document.getElementById("file-name");
-
-dropArea.addEventListener("click", () => fileInput.click());
-fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  fileNameDisplay.textContent = file ? file.name : "";
-});
-
-// Form Submit
-document.getElementById('resumeForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-
-  fetch('/analyze/', {
-    method: 'POST',
-    body: formData
-  })
-  .then(res => {
-    if (!res.ok) return res.json().then(err => { throw new Error(err.error || "Unknown error"); });
-    return res.json();
-  })
-  .then(data => {
-    console.log('API Response:', data); // Log the full API response for debugging
-
-    const fillTab = (id, content) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      // Ensure the content is not null/undefined
-      if (content === null || content === undefined) {
-        el.innerHTML = "<p>Data not available</p>";
-        return;
-      }
-
-      // If content is an array, format it into a list
-      if (Array.isArray(content)) {
-        if (content.length === 0) {
-          el.innerHTML = "<p>No items available</p>";
-        } else {
-          el.innerHTML = '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>';
-        }
-      } else {
-        // If content is a string or any other type
-        el.innerHTML = `<p>${content || "Not available"}</p>`;
-      }
-    };
-
-    fillTab('overall', data.Overall);
-    fillTab('gaps', data["Notable Gaps"]);
-    fillTab('match_percentage', data["Match Percentage"]);
-    fillTab('key_strengths', data["Key Strengths"]);
-    fillTab('skills_gap', data["Skills Gap"]);
-    fillTab('recommendations', data.Recommendations);
-    fillTab('keywords', data["Keywords Found"]);
-    fillTab('matched_keywords', data["Matched Keywords"]);
-    fillTab('missing_keywords', data["Missing Keywords"]);
-    fillTab('improvements', data["Areas for Improvement"] || data["Improvements"]);
-    fillTab('ats_recommendations', data["ATS Recommendations"]);
-    fillTab('final_verdict', data["Final Verdict"]);
-
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
-    document.getElementById('overall').classList.remove('hidden');
-    defaultMsg.style.display = 'none';
-  })
-  .catch(error => {
-    console.error(" Error:", error);
-    alert("Error: " + error.message);
-  });
-});
-
-
-  </script>
 </body>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/gitOauth.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/dashboardProfile.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/logout.js') }}"></script>
 </html>

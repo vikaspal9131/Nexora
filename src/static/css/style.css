@@ -1,0 +1,163 @@
+/* <!-- Locomotive Scroll CSS --> */
+@import url("https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.css");
+
+
+/* Remix icon CDN  */
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css");
+
+
+/* Google font CDN */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Lexend:wght@100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+#head{
+  font-family: "Forum", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 90px ;
+  line-height: 90px;
+  margin-top: 80px;
+}
+
+#side {
+  font-family: "Forum", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 60px ;
+  line-height: 50px;
+  margin-top: 80px;
+  letter-spacing: -2.2px;
+ 
+}
+header{
+  font-family: "Lexend", sans-serif;
+  font-size: 11px;
+}
+#del{
+   font-family: "Lexend", sans-serif;
+   letter-spacing: -1px;
+   padding-left: 80px;
+   padding-right: 80px;
+  
+}
+
+#middle{
+  width: 90%;
+}
+
+#left-sidebar{
+  padding: 10px 20px 0px 20px;
+  background: #212121;
+  border-radius: 5px;
+}
+
+#job_role {
+  height: 260px; 
+  resize: none; 
+  
+}
+#dashbord-header{
+  border-bottom: 1px solid #333;
+}
+
+#leftbar{
+  border-right: 1px solid #333; 
+  width: 300px;
+}
+
+#job_role::-webkit-scrollbar {
+  display: none; 
+}
+
+
+.loader-screen{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Forum", serif;
+  font-weight: 100;
+  z-index: 10;
+  position:fixed;
+  background: white;
+  position: fixed; 
+ top: 0;
+ left: 0;
+ z-index: 9999; 
+  
+}       
+.loader {
+width: fit-content;
+font-size: 40px;
+background: linear-gradient(135deg,#0000 calc(50% - 0.5em),#000 0 calc(50% + 0.5em),#0000 0) right/300% 100%;
+animation: l22 2s infinite;
+}
+.loader::before {
+content: "Nexora";
+color: #0000;
+padding: 0 5px;
+background: inherit;
+background-image: linear-gradient(135deg,#000 calc(50% - 0.5em),#fff 0 calc(50% + 0.5em),#000 0);
+-webkit-background-clip:text;
+        background-clip:text;
+}
+
+body.loader {
+overflow: hidden;
+}
+
+@keyframes l22{
+100%{background-position: left}
+}
+body.loading {
+overflow: hidden;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.807);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-content {
+  background: rgb(234, 234, 234);
+  padding: 4px 10px 10px 0px;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  border: 1px solid #2c2c2c;
+  font-weight: 300;
+}
+
+
+.loader-d {
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  font-size: 20px;
+  padding-bottom: 8px;
+  background: linear-gradient(currentColor 0 0) 0 100%/0% 3px no-repeat;
+  animation: l2 2s linear infinite;
+  font-family: "Lexend", sans-serif;
+  font-weight: 400;
+  
+
+}
+.loader-d:before {
+  content:"Analyzing...";
+  
+}
+@keyframes l2 {to{background-size: 100% 3px}}
+@keyframes l14 {
+  100%  {background-position:right,left,center,right}
+}
