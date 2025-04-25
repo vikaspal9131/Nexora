@@ -6,16 +6,18 @@ analyze_bp = Blueprint('analyze', __name__)
 
 @analyze_bp.route('/', methods=['POST'])
 def analyze():
-    if 'resume' not in request.files or 'job_role' not in request.form:
-        return jsonify({"error": "Missing resume file or job role"}), 400
+    # Checking if both resume and job description are provided
+    if 'resume' not in request.files or 'job_description' not in request.form:
+        return jsonify({"error": "Missing resume file or job description"}), 400
 
-    job_role = request.form['job_role']
+    # Extracting form data
+    job_description = request.form['job_description']  # Get job description from form
     resume_file = request.files['resume']
 
     if resume_file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # Extract resume text
+    # Extract resume text based on file type
     if resume_file.filename.endswith('.pdf'):
         resume_text = extract_text_from_pdf(resume_file)
     elif resume_file.filename.endswith('.docx'):
@@ -23,10 +25,10 @@ def analyze():
     else:
         return jsonify({"error": "Unsupported file format. Upload PDF or DOCX."}), 400
 
-    # Analyze resume with Gemini (or any analysis function)
-    analysis_result = analyze_resume(job_role, resume_text)
+    # Now analyze the resume with Gemini and job description
+    analysis_result = analyze_resume(job_description, resume_text)
 
-    # Full response to match frontend JS expectations
+    # Preparing the response with all extracted information
     response = {
         "Overall": analysis_result.get("overall", ""),
         "Notable Gaps": analysis_result.get("notable_gaps", []),
@@ -34,12 +36,12 @@ def analyze():
         "Final Verdict": analysis_result.get("final_verdict", ""),
         "Areas for Improvement": analysis_result.get("areas_for_improvement", []),
         "Keywords Found": analysis_result.get("keywords_found", []),
-        "Key Strengths": analysis_result.get("key_strengths", []),
         "Match Percentage": analysis_result.get("match_percentage", "N/A"),
         "Matched Keywords": analysis_result.get("matched_keywords", []),
         "Missing Keywords": analysis_result.get("missing_keywords", []),
         "Skills Gap": analysis_result.get("skills_gap", []),
-        "ATS Recommendations": analysis_result.get("ats_recommendations", [])
+        "ATS Recommendations": analysis_result.get("ats_recommendations", []),
+        "Key Strengths": analysis_result.get("key_strengths", [])
     }
 
     return jsonify(response)

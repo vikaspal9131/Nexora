@@ -11,13 +11,10 @@
 
   <style>
     .hidden {
-  display: none;
-}
+      display: none;
+    }
   </style>
 </head>
-
-
-
 <body style="display: none;" class="bg-black text-gray-200 h-screen flex flex-col font-[Lexend]">
   <header id="dashbord-header" class="flex justify-between items-center py-4 px-6 text-xl shadow-md">
     <div><i class="ri-artboard-2-line"></i> Nexora</div>
@@ -50,21 +47,25 @@
         <p data-tab="final_verdict">Final verdict</p>
       </div>
 
-      <button id="logout-btn" class="mt-[80px] px-6 py-[5px] bg-white text-black rounded-[2px]">Sign out <i class="ri-logout-box-line"></i></button>
+      <button id="logout-btn" class="mt-[80px] px-6 py-[5px] bg-blue-700 text-white rounded-[2px]">Sign out <i class="ri-logout-box-line"></i></button>
 
       <div id="logout-modal" class="modal" style="display:none;">
         <div class="modal-content">
-          <button id="cancel-logout" class="ml-[300px] "><i class="ri-close-large-line"></i></button>
-          <h3>Are you sure you want to Sing out ?</h3>
-          <button id="confirm-logout" class="mt-6  text-white px-6 py-[5px] bg-black rounded-[4px]">Sign out </button>
-          <button id="cancel-logout" class="mt-6 text-white px-6  py-[5px] bg-black rounded-[4px]">Next time</button>
+          <button id="cancel-logout" class="ml-[340px] mb-[130px] absolute"><i class="ri-close-large-line"></i></button>
+          <h3>Are you sure you want to Sign out ?</h3>
+          <div class="flex gap-4">
+            <button id="confirm-logout" class="mt-6  text-white px-6 py-[5px] bg-black rounded-[4px]">Sign out </button>
+            <button id="cancel-logout" class="mt-6 text-white px-6  py-[5px] bg-black rounded-[4px]">Next time</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Tab Content -->
-    <main id="tab-contents" class="h-[600px] w-full overflow-y-auto text-sm text-gray-300 ">
-      <div id="loader" class="loader-d hidden"></div>
+    <main id="tab-contents" class="h-[600px] w-full overflow-y-auto text-sm text-gray-300">
+      <div id="loader" class="loader-d hidden">
+       
+      </div>
       <div id="overall" class="tab-pane hidden"></div>
       <div id="gaps" class="tab-pane hidden"></div>
       <div id="match_percentage" class="tab-pane hidden"></div>
@@ -81,26 +82,25 @@
     </main>
 
     <!-- Upload Form -->
-    <section id="left-sidebar" class="md:w-1/2 w-full  md:px-6 ">
+    <section id="left-sidebar" class="md:w-1/2 w-full md:px-6 ">
       <h2 class="text-xl mb-8 font-light">Upload Resume & Job Description</h2>
-      <form id="resumeForm" enctype="multipart/form-data">
-        <label class="block mb-2 text-sm font-light text-gray-300">Upload PDF</label>
-        <div id="drop-area" class="w-full h-32 p-6 border border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer">
-          <i class="ri-folder-upload-fill text-2xl mb-2"></i>
-          <span class="text-gray-400 font-light">Drag & Drop PDF here or Click to Upload</span>
-          <input id="file-input" name="resume" type="file" accept="application/pdf" class="hidden" required>
+      <form id="resumeForm" class="space-y-6">
+        <div class="flex flex-col">
+          <label for="resume" class="block mb-2 text-sm font-light text-gray-300">Upload your resume</label>
+          <input type="file" id="resume" name="resume" class="hidden" accept=".pdf,.docx" />
+          <label for="resume" class="w-full h-32 p-6 border border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer text-gray-200">
+            <span> <i class="ri-folder-upload-line"></i> Upload your resume</span>
+          </label>
         </div>
-        <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
+        
 
-        <label class="block mt-6 mb-2 text-sm font-light">Job Role</label>
-        <textarea name="job_role" id="job_role" rows="3"
-        class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white resize-none overflow-y-auto"
-        placeholder="e.g., Frontend Developer" required></textarea>
-
-        <button type="submit" class="mt-6 bg-white text-black px-4 py-2 rounded-md w-full mb-8">
-          Detailed Resume Review
-        </button>
-      </form>
+        <div class="flex flex-col">
+            <label for="job_description" class="block mb-2 text-sm font-light text-gray-300">Job Description</label>
+            <textarea id="job_description" name="job_description" rows="5"class="w-full p-2 border border-gray-500 rounded-md bg-transparent text-white resize-none overflow-y-auto"
+            placeholder="e.g., Frontend Developer" required></textarea>
+        </div>
+        <button type="submit" class="mt-6 bg-blue-700 text-white px-4 py-2 rounded-md w-full mb-8">Detail Analyze <i class="ri-bard-fill"></i></button>
+    </form>
     </section>
   </div>
 </body>

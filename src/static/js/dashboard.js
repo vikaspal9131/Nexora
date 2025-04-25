@@ -1,94 +1,78 @@
-const tabs = document.querySelectorAll('#tabs [data-tab]');
-const panes = document.querySelectorAll('.tab-pane');
-const defaultMsg = document.getElementById('default-msg');
-const loader = document.getElementById('loader'); // Loader element
+const form = document.getElementById("resumeForm");
+const tabContents = document.querySelectorAll(".tab-pane");
+const tabs = document.querySelectorAll("#tabs p");
+const defaultMsg = document.getElementById("default-msg");
 
-// Tab switching
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.dataset.tab;
-    panes.forEach(p => p.classList.add('hidden'));
-    const active = document.getElementById(target);
-    if (active) {
-      active.classList.remove('hidden');
-      defaultMsg.style.display = 'none';
-    }
-  });
-});
+let analysisData = {}; // Store API response here
 
-// File Upload
-const dropArea = document.getElementById("drop-area");
-const fileInput = document.getElementById("file-input");
-const fileNameDisplay = document.getElementById("file-name");
+// 👇 Mapping between data-tab and JSON keys
+const tabKeyMap = {
+  overall: "Overall",
+  gaps: "Notable Gaps",
+  match_percentage: "Match Percentage",
+  key_strengths: "Key Strengths",
+  skills_gap: "Skills Gap",
+  recommendations: "Recommendations",
+  keywords: "Keywords Found",
+  matched_keywords: "Matched Keywords",
+  missing_keywords: "Missing Keywords",
+  improvements: "Areas for Improvement",
+  ats_recommendations: "ATS Recommendations",
+  final_verdict: "Final Verdict"
+};
 
-dropArea.addEventListener("click", () => fileInput.click());
-fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  fileNameDisplay.textContent = file ? file.name : "";
-});
-
-// Form Submit
-document.getElementById('resumeForm').addEventListener('submit', function(e) {
+// Submit Form and Get API Response
+form.addEventListener("submit", async function (e) {
   e.preventDefault();
-  const formData = new FormData(this);
 
-  // Show loader and hide default message
-  loader.classList.remove('hidden');
-  defaultMsg.style.display = 'none';
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+  const formData = new FormData(form);
+  const loader = document.getElementById("loader");
 
-  fetch('/analyze/', {
-    method: 'POST',
-    body: formData
-  })
-  .then(res => {
-    if (!res.ok) return res.json().then(err => { throw new Error(err.error || "Unknown error"); });
-    return res.json();
-  })
-  .then(data => {
-    console.log('API Response:', data);
+  loader.classList.remove("hidden");
+  defaultMsg.classList.add("hidden"); // Hide default message when submitting form
 
-    const fillTab = (id, content) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+  try {
+    const response = await fetch("/analyze", {
+      method: "POST",
+      body: formData,
+    });
 
-      if (content === null || content === undefined) {
-        el.innerHTML = "<p>Data not available</p>";
-        return;
-      }
+    const data = await response.json();
+    analysisData = data;
 
-      if (Array.isArray(content)) {
-        if (content.length === 0) {
-          el.innerHTML = "<p>No items available</p>";
-        } else {
-          el.innerHTML = '<ul class="list-disc pl-5 space-y-1">' + content.map(item => `<li>${item}</li>`).join('') + '</ul>';
-        }
-      } else {
-        el.innerHTML = `<p>${content || "Not available"}</p>`;
-      }
-    };
+    loader.classList.add("hidden");
 
-    fillTab('overall', data.Overall);
-    fillTab('gaps', data["Notable Gaps"]);
-    fillTab('match_percentage', data["Match Percentage"]);
-    fillTab('key_strengths', data["Key Strengths"]);
-    fillTab('skills_gap', data["Skills Gap"]);
-    fillTab('recommendations', data.Recommendations);
-    fillTab('keywords', data["Keywords Found"]);
-    fillTab('matched_keywords', data["Matched Keywords"]);
-    fillTab('missing_keywords', data["Missing Keywords"]);
-    fillTab('improvements', data["Areas for Improvement"] || data["Improvements"]);
-    fillTab('ats_recommendations', data["ATS Recommendations"]);
-    fillTab('final_verdict', data["Final Verdict"]);
+    // 👉 Hide the default message when data is loaded
+    defaultMsg.classList.add("hidden");
 
-    // Show "overall" tab and hide loader
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
-    document.getElementById('overall').classList.remove('hidden');
-    loader.classList.add('hidden');
-  })
-  .catch(error => {
-    loader.classList.add('hidden');
-    console.error("Error:", error);
-    alert("Error: " + error.message);
+    // 👉 Auto-open first tab after data loads
+    const firstTab = tabs[0];
+    firstTab.click();
+  } catch (err) {
+    loader.classList.add("hidden");
+    alert("Error analyzing resume.");
+  }
+});
+
+// Handle Tab Click and Show Related Content
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const selected = tab.getAttribute("data-tab");
+
+    tabContents.forEach((pane) => pane.classList.add("hidden"));
+
+    const selectedPane = document.getElementById(selected);
+    selectedPane.classList.remove("hidden");
+
+    const content = analysisData[tabKeyMap[selected]];
+
+    // Show content with the headline (tab title)
+    const headline = `<h3 class="font-semibold text-[40px] py-[20px] text-gray-300">${tabKeyMap[selected]}</h3>`;
+
+    if (Array.isArray(content)) {
+      selectedPane.innerHTML = headline + "<ul class='list-disc pl-5'>" + content.map(item => `<li>${item}</li>`).join("") + "</ul>";
+    } else {
+      selectedPane.innerHTML = headline + `<p>${content || 'No data available.'}</p>`;
+    }
   });
 });

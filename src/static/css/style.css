@@ -51,8 +51,8 @@ header{
   border-radius: 5px;
 }
 
-#job_role {
-  height: 260px; 
+#job_description {
+  height: 240px; 
   resize: none; 
   
 }
@@ -65,7 +65,7 @@ header{
   width: 300px;
 }
 
-#job_role::-webkit-scrollbar {
+#job_description::-webkit-scrollbar {
   display: none; 
 }
 
@@ -121,7 +121,8 @@ overflow: hidden;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.807);
+  backdrop-filter: blur(5px); /* Yeh line add karo blur ke liye */
+  background: rgba(0, 0, 0, 0.4); /* Thoda halka black background */
   display: none;
   justify-content: center;
   align-items: center;
@@ -129,35 +130,39 @@ overflow: hidden;
 }
 .modal-content {
   background: rgb(234, 234, 234);
-  padding: 4px 10px 10px 0px;
   border-radius: 5px;
   text-align: center;
   color: black;
   border: 1px solid #2c2c2c;
   font-weight: 300;
+  width: 400px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 
 .loader-d {
   position: fixed;
   top: 50%;
   left: 40%;
   transform: translate(-50%, -50%);
-  width: fit-content;
-  font-size: 20px;
-  padding-bottom: 8px;
-  background: linear-gradient(currentColor 0 0) 0 100%/0% 3px no-repeat;
-  animation: l2 2s linear infinite;
-  font-family: "Lexend", sans-serif;
-  font-weight: 400;
-  
-
+  width: 80px;
+  aspect-ratio: 1;
+  border: 10px solid #0000;
+  box-sizing: border-box;
+  background: 
+    radial-gradient(farthest-side,#fff 98%,#0000) 0    0/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#0000) 100% 0/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#0000) 100% 100%/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#0000) 0 100%/20px 20px,
+    linear-gradient(#fff 0 0) 50%/40px 40px,
+    #000;
+  background-repeat:no-repeat;
+  filter: blur(4px) contrast(10);
+  animation: l12 0.8s infinite;
 }
-.loader-d:before {
-  content:"Analyzing...";
-  
-}
-@keyframes l2 {to{background-size: 100% 3px}}
-@keyframes l14 {
-  100%  {background-position:right,left,center,right}
+@keyframes l12 {
+  100%  {background-position:100% 0,100% 100%,0 100%,0 0,center}
 }
