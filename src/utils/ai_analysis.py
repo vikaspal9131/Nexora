@@ -3,7 +3,7 @@ import json
 import re
 from config import Config
 
-# Configure Gemini API
+
 genai.configure(api_key=Config.GENAI_API_KEY)
 model = genai.GenerativeModel("gemini-2.0-flash")
 
@@ -39,7 +39,7 @@ def analyze_resume(job_description, resume_text):
     Respond **only** in valid JSON format without any extra explanation or text. Do not add markdown or code blocks.
     """
 
-    # Request to Gemini API
+
     response = model.generate_content(prompt)
 
     try:
@@ -63,7 +63,7 @@ def analyze_resume(job_description, resume_text):
             "ats_recommendations": full_data.get("ats_recommendations", [])
         }
     except json.JSONDecodeError as e:
-        print("❌ JSON Parse Error:", e)
+        print("JSON Parse Error:", e)
         return {
             "overall": response.text,
             "key_strengths": [],

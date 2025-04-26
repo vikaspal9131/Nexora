@@ -6,18 +6,18 @@ analyze_bp = Blueprint('analyze', __name__)
 
 @analyze_bp.route('/', methods=['POST'])
 def analyze():
-    # Checking if both resume and job description are provided
+    
     if 'resume' not in request.files or 'job_description' not in request.form:
         return jsonify({"error": "Missing resume file or job description"}), 400
 
-    # Extracting form data
-    job_description = request.form['job_description']  # Get job description from form
+   
+    job_description = request.form['job_description']  
     resume_file = request.files['resume']
 
     if resume_file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # Extract resume text based on file type
+    
     if resume_file.filename.endswith('.pdf'):
         resume_text = extract_text_from_pdf(resume_file)
     elif resume_file.filename.endswith('.docx'):
@@ -25,10 +25,10 @@ def analyze():
     else:
         return jsonify({"error": "Unsupported file format. Upload PDF or DOCX."}), 400
 
-    # Now analyze the resume with Gemini and job description
+    
     analysis_result = analyze_resume(job_description, resume_text)
 
-    # Preparing the response with all extracted information
+ 
     response = {
         "Overall": analysis_result.get("overall", ""),
         "Notable Gaps": analysis_result.get("notable_gaps", []),

@@ -3,9 +3,9 @@ const tabContents = document.querySelectorAll(".tab-pane");
 const tabs = document.querySelectorAll("#tabs p");
 const defaultMsg = document.getElementById("default-msg");
 
-let analysisData = {}; // Store API response here
+let analysisData = {};
 
-// 👇 Mapping between data-tab and JSON keys
+
 const tabKeyMap = {
   overall: "Overall",
   gaps: "Notable Gaps",
@@ -21,7 +21,6 @@ const tabKeyMap = {
   final_verdict: "Final Verdict"
 };
 
-// Submit Form and Get API Response
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -29,7 +28,7 @@ form.addEventListener("submit", async function (e) {
   const loader = document.getElementById("loader");
 
   loader.classList.remove("hidden");
-  defaultMsg.classList.add("hidden"); // Hide default message when submitting form
+  defaultMsg.classList.add("hidden"); 
 
   try {
     const response = await fetch("/analyze", {
@@ -42,10 +41,10 @@ form.addEventListener("submit", async function (e) {
 
     loader.classList.add("hidden");
 
-    // 👉 Hide the default message when data is loaded
+  
     defaultMsg.classList.add("hidden");
 
-    // 👉 Auto-open first tab after data loads
+    
     const firstTab = tabs[0];
     firstTab.click();
   } catch (err) {
@@ -54,7 +53,7 @@ form.addEventListener("submit", async function (e) {
   }
 });
 
-// Handle Tab Click and Show Related Content
+
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     const selected = tab.getAttribute("data-tab");
@@ -66,7 +65,7 @@ tabs.forEach((tab) => {
 
     const content = analysisData[tabKeyMap[selected]];
 
-    // Show content with the headline (tab title)
+
     const headline = `<h3 class="font-semibold text-[40px] py-[20px] text-gray-300">${tabKeyMap[selected]}</h3>`;
 
     if (Array.isArray(content)) {
