@@ -55,7 +55,7 @@ header{
 }
 
 #job_description {
-  height: 240px; 
+  height: 270px; 
   resize: none; 
   
 }
@@ -90,10 +90,6 @@ header{
  z-index: 9999; 
   
 }    
-
-
-
-
 
 .loader {
 width: fit-content;

@@ -39,7 +39,7 @@ def login():
 
 @app.route("/template")
 def template():
-    return render_template("template.html")
+    return render_template("template.jinja")
 
 
 if __name__ == "__main__":
