@@ -44,7 +44,7 @@
         <p data-tab="missing_keywords">Missing Keywords</p>
         <p data-tab="improvements">Areas for Improvement</p>
         <p data-tab="ats_recommendations">ATS Recommendations</p>
-        <p data-tab="final_verdict">Final verdict</p>
+        <p data-tab="final_verdict">Final Report</p>
       </div>
 
       <button id="logout-btn" class="mt-[80px] px-6 py-[5px] bg-blue-700 text-white rounded-[2px]">Sign out <i class="ri-logout-box-line"></i></button>
@@ -64,7 +64,7 @@
     <!-- Tab Content -->
     <main id="tab-contents" class="h-[600px] w-full overflow-y-auto text-sm text-gray-300">
       <div id="loader" class="loader-d hidden">
-       
+       <p class="text-white">Analysis</p>
       </div>
       <div id="overall" class="tab-pane hidden"></div>
       <div id="gaps" class="tab-pane hidden"></div>
@@ -86,7 +86,6 @@
       <h2 class="text-xl mb-8 font-light">Upload Resume & Job Description</h2>
       <form id="resumeForm" class="space-y-6">
         <div class="flex flex-col">
-          <label for="resume" class="block mb-2 text-sm font-light text-gray-300">Upload your resume</label>
           <input type="file" id="resume" name="resume" class="hidden" accept=".pdf,.docx" />
           <label for="resume" class="w-full h-32 p-6 border border-gray-500 rounded-md mb-2 flex flex-col items-center justify-center cursor-pointer text-gray-200">
             <span> <i class="ri-folder-upload-line"></i> Upload your resume</span>

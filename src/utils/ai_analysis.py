@@ -10,6 +10,7 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 def analyze_resume(job_description, resume_text):
     prompt = f"""
     You are a Senior Technical HR Manager with 10+ years of experience hiring developers.
+    
 
     The job description for the role is as follows:
     {job_description}

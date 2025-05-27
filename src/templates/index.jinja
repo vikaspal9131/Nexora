@@ -18,10 +18,10 @@
     <header class="flex justify-between items-center p-6">
         <h1 class="text-2xl"><i class="ri-artboard-2-line"></i> Nexora</h1>
         <nav class="hidden md:flex space-x-6 font-semibold ">
-            <a href="#" class="hover:underline">HOME</a>
-            <a href="#" class="hover:underline">TEMPLATES</a>
-            <a href="#" class="hover:underline">FEATURE</a>
-            <a href="#" class="hover:underline">ABOUT</a>
+            <a href="/" class="hover:underline">HOME</a>
+            <a href="/template" class="hover:underline">TEMPLATES</a>
+            <a href="#feature" class="hover:underline">FEATURE</a>
+            <a href="#about" class="hover:underline">ABOUT</a>
         </nav>
 
     <a href="/dashboard"
@@ -88,7 +88,7 @@
         </div>
     </section>
 
-    <section class="bg-black text-white py-16 md:px-12 font-[Lexend]">
+    <section id="feature" class="bg-black text-white py-16 md:px-12 font-[Lexend]">
             <div class="max-w-6xl mx-auto text-center">
                 <h2 class="text-3xl md:text-5xl mt-2">
                     Transforming resume optimization with AI-driven, ATS-friendly precision.
@@ -98,18 +98,18 @@
                 </button>
             </div>
         
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div  class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <div class="bg-black overflow-hidden">
                     <img src="{{ url_for('static', filename='assets/images/del1.webp') }}"  alt="Introducing Frames" class="w-full h-64 object-cover" loading="lazy">
                     <div class="py-4">
-                        <h3 class="text-lg font-semibold">Introducing Frames</h3>
-                        <p class="text-sm text-gray-400">Research / November 26, 2024</p>
+                        <h3 class="text-lg font-semibold">Prepare and Analyze Your Resume</h3>
+                        <p class="text-sm text-gray-400">Get Your Resume Job-Ready with Expert Insights</p>
                     </div>
                 </div>
                 <div class="bg-black rounded-lg overflow-hidden">
-                    <img src="{{ url_for('static', filename='assets/images/del3.webp') }}" class="w-full h-64 object-cover" loading="lazy">
+                    <img src="{{ url_for('static', filename='assets/images/about.jpg') }}" class="w-full h-64 object-cover" loading="lazy">
                     <div class="py-4">
-                        <h3 class="text-lg font-semibold">Introducing Gen-3 Alpha</h3>
+                        <h3 class="text-lg font-semibold">Introducing Google Geminiai </h3>
                         <p class="text-sm text-gray-400">Research / June 18, 2024</p>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                     <span class=""><i class="ri-artboard-2-line"></i> Nexora</span>
                 </button>
                 <h3 class="text-xl font-[400]">Subscribe to the Nexora Newsletter</h3>
-                <p class="text-gray-500 text-sm mt-2">Latest news, musings, announcements, and updates direct to your
+                <p class="text-gray-500 text-sm mt-2">Latest news, musings, announcements
                     inbox.
                 </p>
              
