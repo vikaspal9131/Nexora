@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: nexora
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "cd src && python app.py"
+    envVars:
+      - key: FLASK_ENV
+        value: production
+    plan: free
+    region: oregon
