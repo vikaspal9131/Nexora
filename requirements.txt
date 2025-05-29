@@ -1,5 +1,6 @@
 Flask
 flask-session
+flask-cors
 PyMuPDF
 python-docx
 google-generativeai
