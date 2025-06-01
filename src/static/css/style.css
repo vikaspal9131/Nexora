@@ -170,3 +170,30 @@ overflow: hidden;
 @keyframes l12 {
   100%  {background-position:100% 0,100% 100%,0 100%,0 0,center}
 }
+
+
+
+
+/* Mobile (phones) ke liye media query */
+@media only screen and (max-width: 426px) {
+  /* Yahan apne responsive styles likho */
+  
+  body {
+   overflow-x: hidden;
+  }
+
+  #head {
+    font-size: 50px;
+    line-height: 50px;
+    margin-top: -60px;
+  }
+  #del {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #feature {
+    padding: 10px 20px;
+  }
+
+ 
+}
