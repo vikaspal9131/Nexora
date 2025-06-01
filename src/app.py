@@ -24,13 +24,7 @@ CORS(app)
 app.register_blueprint(analyze_bp, url_prefix="/analyze")
 app.register_blueprint(history_bp, url_prefix="/history")
 
-@app.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace("http://", "https://", 1)
-        return redirect(url, code=301)
 
-app.register_blueprint(analyze_bp, url_prefix='/analyze')
 
 
 @app.route("/")

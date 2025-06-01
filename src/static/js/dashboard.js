@@ -37,7 +37,7 @@ form.addEventListener("submit", async function (e) {
   defaultMsg.classList.add("hidden");
 
   try {
-    const response = await fetch("/analyze", {
+    const response = await fetch('https://nexora-pl6k.onrender.com/analyze/', {
       method: "POST",
       body: formData,
     });
